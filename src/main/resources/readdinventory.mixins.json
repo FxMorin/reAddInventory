@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "ca.fxco.readdinventory.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "Gui_hotbarMixin",
+    "Inventory_1Mixin",
+    "InventoryMenu_smallMixin",
+    "Minecraft_clientMixin",
+    "Player_slotMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
