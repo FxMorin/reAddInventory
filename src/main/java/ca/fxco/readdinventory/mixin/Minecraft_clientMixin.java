@@ -19,13 +19,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public abstract class Minecraft_clientMixin {
 
-    @Shadow @Final public Options options;
+    @Shadow
+    @Final
+    public Options options;
 
-    @Shadow @Nullable public MultiPlayerGameMode gameMode;
+    @Shadow
+    @Nullable
+    public MultiPlayerGameMode gameMode;
 
-    @Shadow @Nullable public LocalPlayer player;
+    @Shadow
+    @Nullable
+    public LocalPlayer player;
 
-    @Shadow public abstract void setScreen(@Nullable Screen screen);
+    @Shadow
+    public abstract void setScreen(@Nullable Screen screen);
+
 
     @Inject(
             method = "handleKeybinds()V",
@@ -45,6 +53,7 @@ public abstract class Minecraft_clientMixin {
             }
         }
     }
+
 
     @ModifyConstant(
             method = "handleKeybinds()V",

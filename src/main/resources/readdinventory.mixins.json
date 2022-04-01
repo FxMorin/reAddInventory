@@ -4,15 +4,15 @@
   "package": "ca.fxco.readdinventory.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "Gui_hotbarMixin",
     "Inventory_1Mixin",
     "InventoryMenu_smallMixin",
-    "Minecraft_clientMixin",
     "Player_slotMixin",
     "ServerPlayer_creativeMixin",
     "ServerPlayerGameMode_creativeMixin"
   ],
   "client": [
+    "Gui_hotbarMixin",
+    "Minecraft_clientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

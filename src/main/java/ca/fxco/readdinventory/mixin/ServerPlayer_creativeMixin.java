@@ -9,11 +9,13 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ServerPlayer.class)
 public class ServerPlayer_creativeMixin {
 
+
     @Redirect(
             method = "tryThrowBlock(Lnet/minecraft/world/phys/Vec3;)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/server/level/ServerPlayer;setCarriedBlock(Lnet/minecraft/world/level/block/state/BlockState;)V"
+                    target = "Lnet/minecraft/server/level/ServerPlayer;" +
+                            "setCarriedBlock(Lnet/minecraft/world/level/block/state/BlockState;)V"
             )
     )
     public void infItems(ServerPlayer instance, BlockState blockState) {

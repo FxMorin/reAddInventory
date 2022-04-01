@@ -10,11 +10,15 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ServerPlayerGameMode.class)
 public class ServerPlayerGameMode_creativeMixin {
 
+
     @Redirect(
-            method = "useItemOn(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/level/Level;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;",
+            method = "useItemOn(Lnet/minecraft/server/level/ServerPlayer;Lnet/minecraft/world/level/Level;" +
+                    "Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/InteractionHand;" +
+                    "Lnet/minecraft/world/phys/BlockHitResult;)Lnet/minecraft/world/InteractionResult;",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/server/level/ServerPlayer;setCarriedBlock(Lnet/minecraft/world/level/block/state/BlockState;)V"
+                    target = "Lnet/minecraft/server/level/ServerPlayer;" +
+                            "setCarriedBlock(Lnet/minecraft/world/level/block/state/BlockState;)V"
             )
     )
     public void useItemOn(ServerPlayer instance, BlockState blockState) {

@@ -24,15 +24,21 @@ import static net.minecraft.client.gui.components.AbstractWidget.WIDGETS_LOCATIO
 @Mixin(Gui.class)
 public abstract class Gui_hotbarMixin extends GuiComponent {
 
-    @Shadow @Final private Minecraft minecraft;
+    @Shadow
+    @Final
+    private Minecraft minecraft;
 
-    @Shadow protected abstract Player getCameraPlayer();
+    @Shadow
+    private int screenWidth;
 
-    @Shadow private int screenWidth;
+    @Shadow
+    private int screenHeight;
 
-    @Shadow private int screenHeight;
+    @Shadow
+    protected abstract Player getCameraPlayer();
 
-    @Shadow protected abstract void renderSlot(int i, int j, float f, Player player, ItemStack itemStack, int k);
+    @Shadow
+    protected abstract void renderSlot(int i, int j, float f, Player player, ItemStack itemStack, int k);
 
     @Inject(
             method = "render(Lcom/mojang/blaze3d/vertex/PoseStack;F)V",
@@ -45,9 +51,7 @@ public abstract class Gui_hotbarMixin extends GuiComponent {
             )
     )
     public void alwaysRender(PoseStack poseStack, float f, CallbackInfo ci) {
-        if (this.minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) {
-            this.renderHotbar(f, poseStack);
-        }
+        if (this.minecraft.gameMode.getPlayerMode() != GameType.SPECTATOR) this.renderHotbar(f, poseStack);
     }
 
 
@@ -94,10 +98,12 @@ public abstract class Gui_hotbarMixin extends GuiComponent {
 
 
     @ModifyArg(
-            method = "renderHearts(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/player/Player;IIIIFIIIZ)V",
+            method = "renderHearts(Lcom/mojang/blaze3d/vertex/PoseStack;" +
+                    "Lnet/minecraft/world/entity/player/Player;IIIIFIIIZ)V",
             at = @At(
                     value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/Gui;renderHeart(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/gui/Gui$HeartType;IIIZZ)V"
+                    target = "Lnet/minecraft/client/gui/Gui;renderHeart(Lcom/mojang/blaze3d/vertex/PoseStack;" +
+                            "Lnet/minecraft/client/gui/Gui$HeartType;IIIZZ)V"
             ),
             index = 3
     )

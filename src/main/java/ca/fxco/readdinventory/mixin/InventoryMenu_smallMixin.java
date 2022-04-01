@@ -13,6 +13,7 @@ public abstract class InventoryMenu_smallMixin extends RecipeBookMenu<CraftingCo
         super(menuType, i);
     }
 
+
     @Redirect(
            method = "<init>",
            slice = @Slice(
@@ -34,6 +35,7 @@ public abstract class InventoryMenu_smallMixin extends RecipeBookMenu<CraftingCo
         return new FakeSlot(container,i,j,k);
     }
 
+
     @Redirect(
             method = "<init>",
             at = @At(
@@ -46,13 +48,14 @@ public abstract class InventoryMenu_smallMixin extends RecipeBookMenu<CraftingCo
         return new FakeSlot(container,i,j,k);
     }
 
+
     @Redirect(
             method = "<init>",
             slice = @Slice(
                     from = @At(
                             value = "INVOKE",
-                            target = "Lnet/minecraft/world/inventory/InventoryMenu;" +
-                                    "addSlot(Lnet/minecraft/world/inventory/Slot;)Lnet/minecraft/world/inventory/Slot;",
+                            target = "Lnet/minecraft/world/inventory/InventoryMenu;addSlot(" +
+                                    "Lnet/minecraft/world/inventory/Slot;)Lnet/minecraft/world/inventory/Slot;",
                             shift = At.Shift.AFTER,
                             ordinal = 3
                     )

@@ -15,15 +15,23 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 @Mixin(Inventory.class)
 public abstract class Inventory_1Mixin {
 
-    @Shadow private int timesChanged;
+    @Shadow
+    private int timesChanged;
 
-    @Shadow public abstract ItemStack getItem(int i);
+    @Shadow
+    @Final
+    public Player player;
 
-    @Shadow @Final public Player player;
+    @Shadow
+    @Final
+    public NonNullList<ItemStack> items;
 
-    @Shadow public abstract void setItem(int i, ItemStack itemStack);
+    @Shadow
+    public abstract ItemStack getItem(int i);
 
-    @Shadow @Final public NonNullList<ItemStack> items;
+    @Shadow
+    public abstract void setItem(int i, ItemStack itemStack);
+
 
     @ModifyConstant(
             method = "<init>(Lnet/minecraft/world/entity/player/Player;)V",
@@ -32,6 +40,7 @@ public abstract class Inventory_1Mixin {
     private int modifyInventorySize(int num) {
         return 1;
     }
+
 
     /**
      * @author FX
@@ -42,6 +51,7 @@ public abstract class Inventory_1Mixin {
         return 1;
     }
 
+
     /**
      * @author FX
      * @reason its 1 now
@@ -50,6 +60,7 @@ public abstract class Inventory_1Mixin {
     public static boolean isHotbarSlot(int i) {
         return i == 0;
     }
+
 
     /**
      * @author FX
@@ -60,12 +71,14 @@ public abstract class Inventory_1Mixin {
         return 0;
     }
 
+
     /**
      * @author FX
      * @reason its 1 now
      */
     @Overwrite
     public void swapPaint(double d) {}
+
 
     /**
      * @author FX
