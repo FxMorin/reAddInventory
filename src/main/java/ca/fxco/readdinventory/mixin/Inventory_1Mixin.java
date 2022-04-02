@@ -23,10 +23,6 @@ public abstract class Inventory_1Mixin {
     public Player player;
 
     @Shadow
-    @Final
-    public NonNullList<ItemStack> items;
-
-    @Shadow
     public abstract ItemStack getItem(int i);
 
     @Shadow
@@ -87,9 +83,7 @@ public abstract class Inventory_1Mixin {
     @Overwrite
     public void setChanged() {
         ++this.timesChanged;
-        ItemStack stack = this.getItem(0);
-        this.items.clear();
-        this.setItem(0,stack);
+        this.setItem(0,this.getItem(0));
         this.player.setCarriedBlock(CarriedBlocks.getBlockFromItemStack(this.getItem(0)).orElse(null));
     }
 }
